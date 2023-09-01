@@ -3,7 +3,7 @@
 # Filter out any empty args
 args=$(for var in "$@"; do echo "$var";done | grep =.)
 
-RULE_BREACHES=`$RUNNER_TEMP/bearer scan --host=ec9e-217-155-35-147.ngrok-free.app --exit-code=0 --quiet ${args//$'\n'/ } .`
+RULE_BREACHES=`$RUNNER_TEMP/bearer scan --host=my.staging.bearer.sh --exit-code=0 --quiet ${args//$'\n'/ } .`
 SCAN_EXIT_CODE=$?
 
 echo "::debug::$RULE_BREACHES"
