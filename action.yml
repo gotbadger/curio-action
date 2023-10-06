@@ -66,14 +66,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - shell: bash
-      run: |
-        VERSION="${{ inputs.version }}"
-        if [[ ! -z "$VERSION" ]]; then
-          VERSION="v${VERSION#v}"
-        fi
-
-        curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh -s -- -b "$RUNNER_TEMP" "$VERSION"
     - id: run
       shell: bash
       env:
