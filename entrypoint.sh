@@ -1,5 +1,9 @@
 #!/bin/bash
 
+wget https://github.com/Bearer/bearer/releases/download/untagged-57bcb7d3d621040187fe/bearer_1.26.0_linux_amd64.tar.gz
+tar -zxvf *.tar.gz bearer
+mv bearer $RUNNER_TEMP/
+
 # Filter out any empty args
 args=$(for var in "$@"; do echo "$var";done | grep =.)
 
