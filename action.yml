@@ -66,20 +66,13 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: get-version
-      shell: bash
-      run: |
-        VERSION="${{ inputs.version }}"
-        STRIPPED_VERSION="${VERSION#v}"
-        echo "ver=$STRIPPED_VERSION" >> $GITHUB_OUTPUT
-    - shell: bash
-      run: echo "${{steps.get-version.outputs.ver}}"
     - id: binary
       uses: dsaltares/fetch-gh-release-asset@master
+      # gh api repos/Bearer/bearer/releases | jq ".[0]"
       with:
         repo: 'bearer/bearer'
-        version: 'tags/${{inputs.version}}'
-        file: 'bearer_${{steps.get-version.outputs.ver}}_linux_amd64.tar.gz'
+        version: '123859984'
+        file: 'bearer_1.26.0_linux_amd64.tar.gz'
         token: ${{ github.token }}
     - id: run
       shell: bash
