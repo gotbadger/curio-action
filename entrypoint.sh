@@ -3,6 +3,12 @@
 # Filter out any empty args
 args=$(for var in "$@"; do echo "$var";done | grep =.)
 ORIGIN_URL=$(git -C . remote get-url origin)
+echo "SHA=$SHA"
+echo "ORIGIN_URL$ORIGIN_URL"
+echo "CURRENT_BRANCH=$CURRENT_BRANCH"
+echo "DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH"
+echo "DEFAULT_BRANCH=$DEFAULT_BRANCH"
+
 RULE_BREACHES=`docker run --rm -e SHA=$SHA -e "ORIGIN_URL=$ORIGIN_URL" -e "CURRENT_BRANCH=$CURRENT_BRANCH" -e DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH -e DEFAULT_BRANCH=$DEFAULT_BRANCH -e GITHUB_TOKEN=$GITHUB_TOKEN -v ./:/tmp/scan bearer/bearer:canary-amd64 scan /tmp/scan --host=my.staging.bearer.sh --exit-code=0 --quiet ${args//$'\n'/ }`
 SCAN_EXIT_CODE=$?
 
