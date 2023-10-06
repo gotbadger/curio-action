@@ -80,7 +80,7 @@ runs:
         repo: 'bearer/bearer'
         version: 'tags/${{inputs.version}}'
         file: 'bearer_${{steps.get-version.outputs.ver}}_linux_amd64.tar.gz'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
     - id: run
       shell: bash
       env:
