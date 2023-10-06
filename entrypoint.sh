@@ -4,7 +4,7 @@
 args=$(for var in "$@"; do echo "$var";done | grep =.)
 ORIGIN_URL=$(git -C . remote get-url origin)
 echo "SHA=$SHA"
-echo "ORIGIN_URL$ORIGIN_URL"
+echo "ORIGIN_URL=$ORIGIN_URL"
 echo "CURRENT_BRANCH=$CURRENT_BRANCH"
 echo "DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH"
 echo "DEFAULT_BRANCH=$DEFAULT_BRANCH"
