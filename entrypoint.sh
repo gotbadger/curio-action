@@ -10,9 +10,10 @@ echo "ORIGIN_URL=$ORIGIN_URL"
 echo "CURRENT_BRANCH=$CURRENT_BRANCH"
 echo "DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH"
 echo "DEFAULT_BRANCH=$DEFAULT_BRANCH"
+echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
 echo "============================================================="
 
-RULE_BREACHES=`docker run --rm -e SHA=$SHA -e "ORIGIN_URL=$ORIGIN_URL" -e "CURRENT_BRANCH=$CURRENT_BRANCH" -e DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH -e DEFAULT_BRANCH=$DEFAULT_BRANCH -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v ./:/tmp/scan bearer/bearer:canary-amd64 scan /tmp/scan --host=my.staging.bearer.sh --debug --exit-code=0 ${args//$'\n'/ }`
+RULE_BREACHES=`docker run --rm -e SHA=$SHA -e "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" -e "ORIGIN_URL=$ORIGIN_URL" -e "CURRENT_BRANCH=$CURRENT_BRANCH" -e DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH -e DEFAULT_BRANCH=$DEFAULT_BRANCH -e "GITHUB_TOKEN=$GITHUB_TOKEN" -v ./:/tmp/scan bearer/bearer:canary-amd64 scan /tmp/scan --host=my.staging.bearer.sh --debug --exit-code=0 ${args//$'\n'/ }`
 SCAN_EXIT_CODE=$?
 
 echo "::debug::$RULE_BREACHES"
