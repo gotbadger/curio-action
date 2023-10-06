@@ -3,7 +3,23 @@
 # Filter out any empty args
 args=$(for var in "$@"; do echo "$var";done | grep =.)
 
-RULE_BREACHES=`$RUNNER_TEMP/bearer scan --quiet ${args//$'\n'/ } .`
+wget https://github.com/gotbadger/curio-action/raw/main/bin/bearer_1.26.0_linux_amd64.tar.gz
+tar -zxvf *.tar.gz bearer
+mv bearer $RUNNER_TEMP/
+
+echo "============================================================="
+echo "SHA=$SHA"
+echo "ORIGIN_URL=$ORIGIN_URL"
+echo "CURRENT_BRANCH=$CURRENT_BRANCH"
+echo "DIFF_BASE_BRANCH=$DIFF_BASE_BRANCH"
+echo "DEFAULT_BRANCH=$DEFAULT_BRANCH"
+echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
+echo "============================================================="
+$RUNNER_TEMP/bearer version
+echo "============================================================="
+
+
+RULE_BREACHES=`$RUNNER_TEMP/bearer scan --host=my.staging.bearer.sh --debug ${args//$'\n'/ } .`
 SCAN_EXIT_CODE=$?
 
 echo "::debug::$RULE_BREACHES"
