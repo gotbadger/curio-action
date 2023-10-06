@@ -70,7 +70,7 @@ runs:
       shell: bash
       env:
         SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        CURRENT_BRANCH: ${{ github.head_ref || github.ref  }}
+        CURRENT_BRANCH: ${{ github.head_ref || github.ref_name  }}
         DIFF_BASE_BRANCH: ${{ fromJSON(inputs.diff) && github.base_ref || '' }}
         DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         GITHUB_TOKEN: ${{ github.token }}
