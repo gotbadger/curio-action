@@ -66,6 +66,13 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - id: binary
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        repo: 'bearer/bearer'
+        version: 'tags/${{inputs.version}}'
+        file: 'bearer_${{inputs.version#v}}_linux_amd64.tar.gz'
+        token: ${{ secrets.GITHUB_TOKEN }}
     - id: run
       shell: bash
       env:
