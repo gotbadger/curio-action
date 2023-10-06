@@ -2,7 +2,7 @@
 
 # Filter out any empty args
 args=$(for var in "$@"; do echo "$var";done | grep =.)
-RULE_BREACHES=`docker run --rm -v .:/tmp/scan -v $rule_loc:/tmp/rules bearer/bearer:$BEARER_VERSION scan /tmp/scan --host=my.staging.bearer.sh --exit-code=0 --quiet ${args//$'\n'/ }`
+RULE_BREACHES=`docker run --rm -v .:/tmp/scan -v $rule_loc:/tmp/rules bearer/bearer:canary-amd64 scan /tmp/scan --host=my.staging.bearer.sh --exit-code=0 --quiet ${args//$'\n'/ }`
     
 SCAN_EXIT_CODE=$?
 
