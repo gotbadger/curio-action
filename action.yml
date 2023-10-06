@@ -67,11 +67,13 @@ runs:
   using: "composite"
   steps:
     - id: get-version
+      shell: bash
       run: |
         VERSION="${{ inputs.version }}"
         STRIPPED_VERSION="${VERSION#v}"
         echo "ver=$STRIPPED_VERSION" >> $GITHUB_OUTPUT
-    - run: echo "${{steps.get-version.outputs.ver}}"
+    - shell: bash
+      run: echo "${{steps.get-version.outputs.ver}}"
     - id: binary
       uses: dsaltares/fetch-gh-release-asset@master
       with:
